@@ -43,25 +43,26 @@ env:
 
     numpy == 1.16.2; python_version < '3.8'
     numpy == 1.19.5; python_version == '3.8'
-    numpy == 1.23.4; python_version >= '3.9' and python_version <= '3.10'
-    numpy == 1.23.5; python_version == '3.11'
-    numpy == 1.26.4; python_version >= '3.12'
+    numpy; python_version >= '3.9'
 
     scipy == 1.2.1; python_version < '3.8'
     scipy == 1.6.1; python_version == '3.8'
     scipy == 1.9.3; python_version >= '3.9' and python_version <= '3.10'
     scipy == 1.10.1; python_version == '3.11'
-    scipy == 1.12.0; python_version >= '3.12'
+    scipy == 1.12.0; python_version == '3.12'
+    scipy == 1.14.1; python_version == '3.13'
+    scipy; python_version >= '3.13'
 
     Cython == 0.29.16; python_version < '3.8'
     Cython == 0.29.21; python_version >= '3.8'
 
     seaborn == 0.9.0; python_version < '3.9'
-    seaborn == 0.11.0; python_version >= '3.9'
+    seaborn == 0.13.2; python_version >= '3.9'
 
     scikit-learn == 0.20.3; python_version < '3.8'
     scikit-learn == 0.24.1; python_version >= '3.8' and python_version < '3.11'
-    scikit-learn == 1.3.0; python_version >= '3.11'
+    scikit-learn == 1.3.0; python_version >= '3.11' and python_version < '3.13'
+    scikit-learn; python_version >= '3.13'
 
     sklearn-evaluation == 0.4; python_version < '3.9'
     sklearn-evaluation == 0.5.2; python_version == '3.9'
@@ -70,15 +71,16 @@ env:
 
     Keras == 2.2.4; python_version < '3.8'
     Keras == 2.4.3; python_version == '3.8'
-    Keras == 2.13.1; python_version >= '3.9' and python_version <= '3.10'
+    Keras == 2.15.0; python_version >= '3.9' and python_version <= '3.11'
 
     tensorflow == 1.13.1; python_version < '3.8'
     tensorflow == 2.4.1; python_version == '3.8'
-    # tensorflow == 2.7.1; python_version == '3.9'
-    tensorflow == 2.13.1; python_version >= '3.9' and python_version <= '3.11'
+    # Pinned to 2.15.1 for compatibility with https://github.com/onnx/tensorflow-onnx
+    tensorflow == 2.15.1; python_version >= '3.9' and python_version <= '3.11'
 
     # See version compatibility table at https://pypi.org/project/tensorflow-metal/
-    tensorflow-metal == 1.0.0; sys_platform == 'darwin' and python_version == '3.11'
+    # Temporarily disabled as it brings validation loss regressions in some cases [O2-5627]
+    # tensorflow-metal == 1.0.0; sys_platform == 'darwin' and python_version == '3.11'
 
     xgboost == 0.82; python_version < '3.8'
     xgboost == 1.3.3; python_version == '3.8'
@@ -90,7 +92,8 @@ env:
 
     pandas == 0.24.2; python_version < '3.8'
     pandas == 1.2.3; python_version == '3.8'
-    pandas == 1.5.3; python_version >= '3.9'
+    pandas == 1.5.3; python_version >= '3.9' and python_version < '3.13'
+    pandas; python_version >= '3.13'
 
     dask[array,dataframe,distributed] == 2023.2.0; python_version < '3.11'
     dask[array,dataframe,distributed] == 2023.12.1; python_version >= '3.11'
