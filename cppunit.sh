@@ -1,6 +1,6 @@
 package: CppUnit
 version: "%(tag_basename)s" 
-tag: cppunit-1.15.1
+tag: cppunit-1.14.0
 source: http://anongit.freedesktop.org/git/libreoffice/cppunit.git
 requires:
   - "GCC-Toolchain:(?!osx)"
@@ -14,7 +14,6 @@ prefer_system_check:
 . $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
-CMAKE_OPTIONS="${IGNORE_ERRORS:+-k}"
 ##############################
 function Configure() {
     ./autogen.sh

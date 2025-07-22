@@ -20,6 +20,9 @@ prefer_system_check:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Prepare() {
+    rsync -av --delete --delete-excluded $SOURCEDIR/ ./
+}
 function Configure() {
     mkdir build
     meson setup build --prefix=$INSTALLROOT

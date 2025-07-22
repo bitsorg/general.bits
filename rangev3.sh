@@ -35,3 +35,7 @@ function Make() {
 function MakeInstall() {
         cmake --install .
 }
+
+function PostInstall() {
+  echo "setenv RANGEV3_INCLUDE_DIR \$PKG_ROOT" >> $MODULEFILE
+}
