@@ -8,6 +8,7 @@ requires:
   - ROOT
   - GEANT4
   - xercesc
+  - LCIO
   
 build_requires:
   - CMake
@@ -19,8 +20,11 @@ build_requires:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Prepare() {
+     rsync -av --delete --delete-excluded $SOURCEDIR/ ./
+}
 function Configure() {
-  cmake $SOURCEDIR            \
+  cmake .   \
       -DCMAKE_INSTALL_PREFIX=$INSTALLROOT        \
       -DDD4HEP_USE_GEANT4=ON \
       -DBoost_NO_BOOST_CMAKE=ON \
@@ -30,5 +34,11 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
       -DBUILD_DOCS=OFF
 }
+function Make() {
+     cmake --build  . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+}
 
+function MakeInstall() {
+      cmake --install .
+}
 

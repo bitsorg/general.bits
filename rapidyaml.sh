@@ -1,44 +1,36 @@
-package: LCIO
+package: rapidyaml
 version: "%(tag_basename)s"
-tag: "v02-22-03"
-source: https://github.com/iLCSoft/LCIO.git
+tag: "v0.7.0"
+source: https://github.com/biojppm/rapidyaml.git
 requires:
   - "GCC-Toolchain:(?!osx)"
-  - ROOT
-  - CLHEP
   
 build_requires:
   - CMake
   - bits-recipe-tools
 ---
+#!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
+    (cd $SOURCEDIR; git submodule update --init --recursive) 
     rsync -av --delete --delete-excluded $SOURCEDIR/ ./
 }
 function Configure() {
-   cmake . -DCMAKE_BUILD_TYPE=Release \
-           -DCMAKE_INSTALL_PREFIX=$INSTALLROOT        \
-           -DROOT_DIR=$ROOTSYS \
-           -DBUILD_ROOTDICT=ON \
-           -DLCIO_GENERATE_HEADERS=off
+  cmake . -DCMAKE_INSTALL_PREFIX=$INSTALLROOT     \
+          -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}  \
+          -DBUILD_SHARED_LIBS=ON
+
 }
 function Make() {
      cmake --build  . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }
 
 function MakeInstall() {
-      cmake --install .
+      cmake --install . 
 }
-function PostInstall() {
-       mkdir -p $INSTALLROOT/lib/cmake/LCIO"
-       cp -n -r $INSTALLROOT/*.cmake $INSTALLROOT/lib/cmake/LCIO"
-}
-
-  
- 
 
 
